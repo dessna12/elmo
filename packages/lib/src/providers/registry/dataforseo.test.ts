@@ -126,7 +126,7 @@ describe("dataforseo provider", () => {
 
 			expect(dataforseoClient.chatgptLlmResponsesLive).not.toHaveBeenCalled();
 			const [payload] = dataforseoClient.chatGptLlmScraperLiveAdvanced.mock.calls[0];
-			expect(payload[0]).toMatchObject({ location_code: 2840, force_web_search: true });
+			expect(payload[0]).toMatchObject({ location_code: 2250, force_web_search: true });
 
 			expect(stored(result).textContent).toContain("JBL Xtreme 5");
 			expect(result.webQueries).toEqual(["best speakers released July 2026"]);
@@ -275,7 +275,7 @@ describe("dataforseo provider", () => {
 		const [payload] = dataforseoClient.googleOrganicLiveAdvanced.mock.calls[0];
 		expect(payload[0]).toMatchObject({
 			keyword: "What is a well-reviewed speaker released last month?",
-			location_code: 2840,
+			location_code: 2250,
 			load_async_ai_overview: true,
 		});
 

@@ -13,8 +13,9 @@ const MAX_PROMPT_CHARS = 500;
 
 // Country localization is intentionally not exposed via SCRAPE_TARGETS yet
 // because support differs by DataForSEO surface and underlying model.
-export const DFS_LOCATION_CODE = 2840;
-export const DFS_LANGUAGE_CODE = "en";
+// GEOphare (branche fr-locale) : France et français au lieu des États-Unis et de l'anglais.
+export const DFS_LOCATION_CODE = 2250;
+export const DFS_LANGUAGE_CODE = "fr";
 
 export const isDataforseoConfigured = configuredWhen("DATAFORSEO_LOGIN", "DATAFORSEO_PASSWORD");
 
