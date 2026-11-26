@@ -73,6 +73,7 @@ interface DataForSeoLlmRequest {
 	user_prompt: string;
 	model_name: string;
 	web_search: boolean;
+	web_search_country_iso_code?: string;
 }
 
 const LLM_CALLS = {
@@ -205,9 +206,11 @@ async function runLlmResponse(model: string, prompt: string, options?: ProviderO
 		model_name: modelName,
 		web_search: webSearch,
 	};
-	// Do not expose country localization yet: DataForSEO's LLM Responses
-	// support differs by surface/model (ChatGPT has model caveats, Perplexity
-	// only documents it for Sonar models, and Gemini does not document it).
+	// GEOphare (branche fr-locale) : DataForSEO ne documente la localisation de la
+	// recherche web que pour Perplexity (modèles Sonar).
+	if (spec.call === "perplexity" && webSearch) {
+		body.web_search_country_iso_code = "FR";
+	}
 
 	const response = await LLM_CALLS[spec.call](api, [body]);
 	const result = dfsFirstResult<{ model_name?: string; fan_out_queries?: unknown }>(response);
